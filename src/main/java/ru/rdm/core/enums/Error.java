@@ -7,7 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Error {
 
-    PROHIBITED(1000, 404, "Сервис временно недоступен", null);
+    PROHIBITED(1000, 406, "Сервис временно недоступен", null),
+    INVALID_SESSION(1001, 401, "Invalid session", null),
+    INVALID_OTP(1002, 404, "Неверный код подтверждения", null);
 
     private final Integer code;
     private final Integer status;
