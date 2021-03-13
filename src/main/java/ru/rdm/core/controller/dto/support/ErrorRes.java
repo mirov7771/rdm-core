@@ -9,11 +9,9 @@ public class ErrorRes {
 
     private Integer code;
     private String message;
-    private String details;
 
-    public ErrorRes(Integer code, String message, String details) {
+    public ErrorRes(Integer code, String message) {
         this.code = code;
         this.message = message;
-        this.details = details;
     }
 }
