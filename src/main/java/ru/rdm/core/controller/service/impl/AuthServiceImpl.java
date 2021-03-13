@@ -1,30 +1,22 @@
 package ru.rdm.core.controller.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.rdm.core.controller.dto.request.AuthReq;
 import ru.rdm.core.controller.dto.response.AuthRes;
+import ru.rdm.core.controller.method.auth.Auth;
 import ru.rdm.core.controller.service.AuthService;
 
+import java.util.Map;
+
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    @Override
-    public AuthRes check(String accessToken) {
-        return null;
-    }
+    private final Map<String, Auth> authMethod;
 
     @Override
-    public AuthRes login(AuthReq req) {
-        return null;
-    }
-
-    @Override
-    public AuthRes code(AuthReq req) {
-        return null;
-    }
-
-    @Override
-    public AuthRes token(AuthReq req) {
-        return null;
+    public AuthRes auth(AuthReq req, String method) {
+        return authMethod.get(method).execute(req);
     }
 }

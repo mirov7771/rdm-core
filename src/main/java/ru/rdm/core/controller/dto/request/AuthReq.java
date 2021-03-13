@@ -11,5 +11,6 @@ public class AuthReq {
     private String otp;
     private Client client;
     private String code;
+    private String accessToken;
 
 }

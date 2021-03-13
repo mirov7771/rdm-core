@@ -18,25 +18,27 @@ public class Controller {
     @GetMapping(value = "/auth/check", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> check(@RequestHeader("access_token") String accessToken)
     {
-        return ControllerUtil.success(authService.check(accessToken));
+        AuthReq req = new AuthReq();
+        req.setAccessToken(accessToken);
+        return ControllerUtil.success(authService.auth(req, "check"));
     }
 
     @PostMapping(value = "/auth/login", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> login(@RequestBody AuthReq req)
     {
-        return ControllerUtil.success(authService.login(req));
+        return ControllerUtil.success(authService.auth(req, "login"));
     }
 
     @PostMapping(value = "/auth/code", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> code(@RequestBody AuthReq req)
     {
-        return ControllerUtil.success(authService.code(req));
+        return ControllerUtil.success(authService.auth(req, "code"));
     }
 
     @PostMapping(value = "/auth/token", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> token(@RequestBody AuthReq req)
     {
-        return ControllerUtil.success(authService.token(req));
+        return ControllerUtil.success(authService.auth(req, "token"));
     }
 
 }
