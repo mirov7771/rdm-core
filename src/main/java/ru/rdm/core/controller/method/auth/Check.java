@@ -7,6 +7,7 @@ import ru.rdm.core.controller.dto.response.AuthRes;
 import ru.rdm.core.database.dao.UserProfile;
 import ru.rdm.core.database.dao.UserSession;
 import ru.rdm.core.enums.Error;
+import ru.rdm.core.enums.Status;
 import ru.rdm.core.exception.RdmException;
 
 import java.util.Date;
@@ -25,7 +26,7 @@ public class Check extends Auth {
         UserProfile user = userProfileRepository.findByUserId(session.getUserId());
         if (user == null || user.getUserId() == null)
             throw new RdmException(Error.INVALID_SESSION);
-
+        res.setStatus(Boolean.TRUE.equals(user.getAsked()) ? Status.OK : Status.QUESTION);
         log.info("end check {}", res);
         return res;
     }

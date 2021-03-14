@@ -27,5 +27,9 @@ public class UserProfile implements Serializable {
     private String email;
     @Column(name = "INDATE")
     private Date indate;
+    @Column(name = "ROLE")
+    private String role;
+    @Column(name = "ASKED")
+    private Boolean asked;
 
 }
