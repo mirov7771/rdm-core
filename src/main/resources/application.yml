@@ -12,3 +12,9 @@ spring:
         default_schema: public
         temp:
           use_jdbc_metadata_defaults: false
+
+application:
+  timeout:
+    client: 131400
+    temp: 5
+    sms: 1

@@ -1,16 +1,17 @@
 package ru.rdm.core.database.dao;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import ru.rdm.core.controller.dto.support.Client;
+import ru.rdm.core.enums.UserRole;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "USER_PROFILE")
+@NoArgsConstructor
 @Data
 public class UserProfile implements Serializable {
 
@@ -18,6 +19,7 @@ public class UserProfile implements Serializable {
 
     @Id
     @Column(name = "USERID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     @Column(name = "PHONE")
     private String phone;
@@ -31,5 +33,17 @@ public class UserProfile implements Serializable {
     private String role;
     @Column(name = "ASKED")
     private Boolean asked;
+    @Column(name = "LOCATION")
+    private String location;
+
+    public UserProfile(String phone, Client client, UserRole role){
+        this.phone = phone;
+        this.email = client.getEmail();
+        this.fio = client.getFio();
+        this.location = client.getLocation();
+        this.role = role.getRole();
+        this.asked = false;
+        this.indate = new Date();
+    }
 
 }

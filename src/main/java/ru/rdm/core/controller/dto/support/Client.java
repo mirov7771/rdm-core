@@ -7,5 +7,6 @@ public class Client {
 
     private String email;
     private String fio;
+    private String location;
 
 }

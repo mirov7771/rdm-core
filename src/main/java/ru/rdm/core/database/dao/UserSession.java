@@ -2,10 +2,7 @@ package ru.rdm.core.database.dao;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +15,7 @@ public class UserSession implements Serializable {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "SESSIONID")
     private String sessionId;

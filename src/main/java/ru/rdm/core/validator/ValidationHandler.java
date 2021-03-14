@@ -2,14 +2,15 @@ package ru.rdm.core.validator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.MissingRequestHeaderException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.rdm.core.controller.dto.support.ErrorRes;
-import ru.rdm.core.controller.util.ControllerUtil;
+import ru.rdm.core.controller.util.ServiceUtil;
 import ru.rdm.core.enums.Error;
 import ru.rdm.core.exception.RdmException;
 
-@Component
+@ControllerAdvice
 @Slf4j
 public class ValidationHandler {
 
@@ -19,9 +20,11 @@ public class ValidationHandler {
         if (ex instanceof RdmException){
             RdmException e = (RdmException) ex;
             Error error = e.getError();
-            return ControllerUtil.error(error);
+            return ServiceUtil.error(error);
+        } else if (ex instanceof MissingRequestHeaderException){
+            return ServiceUtil.error(Error.REQUIRED_PARAMS);
         }
-        return ControllerUtil.error(Error.PROHIBITED);
+        return ServiceUtil.error(Error.PROHIBITED);
     }
 
 }

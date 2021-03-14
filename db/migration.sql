@@ -22,7 +22,8 @@ create table user_profile
     email 	varchar(50) null,
     indate 	timestamp,
     role    varchar(50),
-    asked   boolean default false
+    asked   boolean default false,
+    location varchar(255) null
 );
 
 create index x1_user_profile on user_profile(phone);
