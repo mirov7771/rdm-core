@@ -13,6 +13,7 @@ public class Code extends Auth {
     public AuthRes execute(AuthReq req) {
         log.info("start code {}", req);
         AuthRes res = new AuthRes();
+        checkTempSession(req, "bySession");
         log.info("end code {}", res);
         return res;
     }

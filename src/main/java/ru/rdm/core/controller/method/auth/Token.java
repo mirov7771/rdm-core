@@ -12,6 +12,7 @@ public class Token extends Auth {
     @Override
     public AuthRes execute(AuthReq req) {
         log.info("start token {}", req);
+        checkTempSession(req, "byCode");
         AuthRes res = new AuthRes();
         log.info("end token {}", res);
         return res;
