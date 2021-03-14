@@ -10,8 +10,8 @@ public class RdmException  extends RuntimeException {
 
     private final Error error;
 
-    public RdmException(Error error, String message){
-        super(message);
+    public RdmException(Error error){
+        super(error.getMessage());
         this.error = error;
     }
 

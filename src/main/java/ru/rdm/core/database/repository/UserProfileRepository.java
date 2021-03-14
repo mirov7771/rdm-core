@@ -8,5 +8,6 @@ import ru.rdm.core.database.dao.UserProfile;
 public interface UserProfileRepository extends CrudRepository<UserProfile, Long> {
 
     UserProfile findByPhone(String phone);
+    UserProfile findByUserId(Long userId);
 
 }
