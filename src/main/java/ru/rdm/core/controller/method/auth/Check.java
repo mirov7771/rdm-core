@@ -8,7 +8,6 @@ import ru.rdm.core.controller.dto.support.Client;
 import ru.rdm.core.database.dao.UserProfile;
 import ru.rdm.core.database.dao.UserSession;
 import ru.rdm.core.enums.Error;
-import ru.rdm.core.enums.Status;
 import ru.rdm.core.exception.RdmException;
 
 import java.util.Date;
