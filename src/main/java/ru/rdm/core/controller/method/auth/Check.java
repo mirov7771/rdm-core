@@ -20,7 +20,7 @@ public class Check extends Auth {
     public AuthRes execute(AuthReq req) {
         log.info("start check {}", req);
         AuthRes res = new AuthRes();
-        UserProfile user = checkSession(req.getAccessToken());
+        UserProfile user = getUserProfile(req.getAccessToken());
         res.setStatus(needQuestion(user.getAsked()));
         Client c = new Client();
         c.setEmail(user.getEmail());
@@ -31,7 +31,7 @@ public class Check extends Auth {
         return res;
     }
 
-    public UserProfile checkSession(String token){
+    private UserProfile getUserProfile(String token){
         UserSession session = userSessionRepository.findByAccessTokenAndExpiryAfter(token, new Date());
         if (session == null || session.getSessionId() == null)
             throw new RdmException(Error.INVALID_SESSION);
@@ -39,5 +39,10 @@ public class Check extends Auth {
         if (user == null || user.getUserId() == null)
             throw new RdmException(Error.INVALID_SESSION);
         return user;
+    }
+
+    public boolean checkSession(String token){
+        UserProfile user = getUserProfile(token);
+        return user.getAsked();
     }
 }

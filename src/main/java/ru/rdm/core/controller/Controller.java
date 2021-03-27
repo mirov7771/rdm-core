@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rdm.core.controller.dto.request.AuthReq;
+import ru.rdm.core.controller.dto.request.CategoryReq;
 import ru.rdm.core.controller.service.AuthService;
+import ru.rdm.core.controller.service.CategoryService;
 import ru.rdm.core.controller.util.ServiceUtil;
 
 @RestController
@@ -14,7 +16,11 @@ public class Controller {
     private final String APPLICATION_JSON_UTF8_VALUE = "application/json;charset=UTF-8";
 
     private final AuthService authService;
+    private final CategoryService categoryService;
 
+    /**
+     * 1. Авторизация
+     */
     @GetMapping(value = "/auth/check", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> check(@RequestHeader("access_token") String accessToken)
     {
@@ -39,6 +45,21 @@ public class Controller {
     public ResponseEntity<?> token(@RequestBody AuthReq req)
     {
         return ServiceUtil.success(authService.auth(req, "token"));
+    }
+
+    /**
+     * 2. Категории/подкатегории/услуги
+     */
+    @GetMapping(value = "/category", produces = APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> category(CategoryReq req)
+    {
+        return ServiceUtil.success(categoryService.category(req, "category"));
+    }
+
+    @GetMapping(value = "/services", produces = APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> services(CategoryReq req)
+    {
+        return ServiceUtil.success(categoryService.category(req, "services"));
     }
 
 }
