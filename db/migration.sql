@@ -37,3 +37,31 @@ create table otp_code
 );
 
 create index x1_otp_code on otp_code(code, phone, type, expiry);
+
+create table category(
+    categoryid   bigint not null generated always as identity primary key,
+    parentid     bigint,
+    categoryname varchar(250),
+    logofile     varchar(150) null,
+    description  text null,
+    type         smallint,
+    priority     smallint
+);
+
+create index x1_category on category(parentid, type);
+
+create table region(
+    regionid   bigint not null generated always as identity primary key,
+    regionname varchar(200) null
+);
+
+create unique index x1_region on region(regionname);
+
+create table region_link(
+    linkid   bigint not null generated always as identity primary key,
+    regionid bigint,
+    childid  bigint
+);
+
+create index x1_region_link on region_link(childid);
+create index x2_region_link on region_link(regionid);
