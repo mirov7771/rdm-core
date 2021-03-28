@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rdm.core.controller.dto.request.AuthReq;
 import ru.rdm.core.controller.dto.request.CategoryReq;
+import ru.rdm.core.controller.dto.request.ReferenceReq;
 import ru.rdm.core.controller.service.AuthService;
 import ru.rdm.core.controller.service.CategoryService;
 import ru.rdm.core.controller.util.ServiceUtil;
@@ -64,6 +65,15 @@ public class Controller {
     {
         req.setAuth(authorization);
         return ServiceUtil.success(categoryService.category(req, "services"));
+    }
+
+    /**
+     * 3. Справочники
+     */
+    @GetMapping(value = "/region", produces = APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> region(ReferenceReq req)
+    {
+        return ServiceUtil.success(null);
     }
 
 }
