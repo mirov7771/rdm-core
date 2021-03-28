@@ -23,7 +23,8 @@ create table user_profile
     indate 	timestamp,
     role    varchar(50),
     asked   boolean default false,
-    location varchar(255) null
+    location varchar(255) null,
+    locatoinid bigint null
 );
 
 create index x1_user_profile on user_profile(phone);

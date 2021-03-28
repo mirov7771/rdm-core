@@ -17,8 +17,10 @@ public class Services extends Category{
     public CategoryRes execute(CategoryReq req) {
         log.info("start services {}", req);
         CategoryRes res = new CategoryRes();
-        List<ru.rdm.core.database.dao.Category> services = categoryRepository.findByParentIdInAndTypeOrderByPriority(req.getCategory()
-                , CategoryType.SERVICE.getType());
+        Long locationId = getLocationId(req);
+        List<ru.rdm.core.database.dao.Category> services = categoryRepository.find(req.getCategory()
+                , CategoryType.SERVICE.getType()
+                , locationId);
         if (checkList(services)){
             res.setList(services.stream().map(this::getCategory).collect(Collectors.toList()));
         }

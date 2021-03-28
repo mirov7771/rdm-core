@@ -8,5 +8,6 @@ import java.util.List;
 public class CategoryReq {
 
     private List<Long> category;
+    private String auth;
 
 }

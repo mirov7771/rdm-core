@@ -26,6 +26,7 @@ public class Check extends Auth {
         c.setEmail(user.getEmail());
         c.setFio(user.getFio());
         c.setLocation(user.getLocation());
+        c.setLocationId(user.getLocationId());
         res.setClient(c);
         log.info("end check {}", res);
         return res;

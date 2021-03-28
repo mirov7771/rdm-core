@@ -21,7 +21,7 @@ public class RequestInterceptor implements HandlerInterceptor {
             , HttpServletResponse response
             , Object handler)
     {
-        String access_token = request.getHeader("access_token");
+        String access_token = request.getHeader("Authorization");
         if (access_token == null || "".equals(access_token)){
             throw new RdmException(Error.INVALID_SESSION);
         }

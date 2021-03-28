@@ -51,14 +51,18 @@ public class Controller {
      * 2. Категории/подкатегории/услуги
      */
     @GetMapping(value = "/category", produces = APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> category(CategoryReq req)
+    public ResponseEntity<?> category(@RequestHeader("Authorization") String authorization
+                                     ,CategoryReq req)
     {
+        req.setAuth(authorization);
         return ServiceUtil.success(categoryService.category(req, "category"));
     }
 
     @GetMapping(value = "/services", produces = APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> services(CategoryReq req)
+    public ResponseEntity<?> services(@RequestHeader("Authorization") String authorization
+                                     ,CategoryReq req)
     {
+        req.setAuth(authorization);
         return ServiceUtil.success(categoryService.category(req, "services"));
     }
 

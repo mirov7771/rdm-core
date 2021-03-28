@@ -19,10 +19,15 @@ public class AllCategory extends Category{
     public CategoryRes execute(CategoryReq req) {
         log.info("start category {}", req);
         CategoryRes res = new CategoryRes();
-        List<ru.rdm.core.database.dao.Category> mainCats = categoryRepository.findByParentIdAndTypeOrderByPriority(0L, CATEGORY.getType());
+        Long locationId = getLocationId(req);
+        List<Long> mainIds = new ArrayList<>();
+        mainIds.add(0L);
+        List<ru.rdm.core.database.dao.Category> mainCats = categoryRepository.find(mainIds, CATEGORY.getType(), locationId);
         if (checkList(mainCats)){
-            List<ru.rdm.core.database.dao.Category> childCats = categoryRepository.findByParentIdInAndTypeOrderByPriority(
-                    mainCats.stream().map(ru.rdm.core.database.dao.Category::getCategoryId).collect(Collectors.toList()), SUBCATEGORY.getType()
+            List<ru.rdm.core.database.dao.Category> childCats = categoryRepository.find(
+                    mainCats.stream().map(ru.rdm.core.database.dao.Category::getCategoryId).collect(Collectors.toList()),
+                    SUBCATEGORY.getType(),
+                    locationId
             );
             if (checkList(childCats)) {
                 List<ru.rdm.core.controller.dto.support.Category> mainList = new ArrayList<>();

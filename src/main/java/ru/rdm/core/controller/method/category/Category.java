@@ -5,6 +5,7 @@ import ru.rdm.core.controller.dto.request.CategoryReq;
 import ru.rdm.core.controller.dto.response.CategoryRes;
 import ru.rdm.core.database.repository.CategoryRepository;
 import ru.rdm.core.enums.CategoryType;
+import ru.rdm.core.security.jwt.JwtTokenBuilder;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public abstract class Category {
 
     @Autowired
     protected CategoryRepository categoryRepository;
+    @Autowired
+    private JwtTokenBuilder jwtTokenBuilder;
 
     public abstract CategoryRes execute(CategoryReq req);
 
@@ -28,6 +31,10 @@ public abstract class Category {
         if (item.getType().equals(CategoryType.SERVICE.getType()))
             c.setCategory(item.getParentId());
         return c;
+    }
+
+    protected Long getLocationId(CategoryReq req){
+        return (Long) jwtTokenBuilder.getParamFromToken(req.getAuth(), "locationId");
     }
 
 }

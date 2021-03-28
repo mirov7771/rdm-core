@@ -35,12 +35,15 @@ public class UserProfile implements Serializable {
     private Boolean asked;
     @Column(name = "LOCATION")
     private String location;
+    @Column(name = "LOCATIONID")
+    private Long locationId;
 
     public UserProfile(String phone, Client client, UserRole role){
         this.phone = phone;
         this.email = client.getEmail();
         this.fio = client.getFio();
         this.location = client.getLocation();
+        this.locationId = client.getLocationId();
         this.role = role.getRole();
         this.asked = false;
         this.indate = new Date();
